@@ -1,0 +1,123 @@
+FORMAT: 1A
+HOST: http://codechallenge-products.apiblueprint.org/
+
+# codechallenge-products
+
+codechallenge-products is a simple API allowing consumers to view available product quantities.
+
+## Products Collection [/products]
+
+### List All Products [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Spider-Man Comic Book",
+                "quantity": 9
+            },
+            {
+                "name": "Incredible Hulk Poster",
+                "quantity": 3
+            },
+            {
+                "name": "Walking Dead Plush Zombie",
+                "quantity": 0
+            }
+        ]
+
+### Create a New Product [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a product name and an initial quantity.
+
++ Request (application/json)
+
+        {
+            "name": "Wonder Woman Lasso",
+            "quantity": 5
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /products/4
+
+    + Body
+
+            [
+                {
+                    "name": "Spider-Man Comic Book",
+                    "quantity": 9
+                },
+                {
+                    "name": "Incredible Hulk Poster",
+                    "quantity": 3
+                },
+                {
+                    "name": "Walking Dead Plush Zombie",
+                    "quantity": 0
+                },
+                {
+                    "name": "Wonder Woman Lasso",
+                    "quantity": 5
+                }
+            ]
+
+## Product Details - with available quantity. [/product/{id}]
+
+### Get single product details. [GET]
+
++ Response 200 (application/json)
+
+        {
+            "name": "Incredible Hulk Poster",
+            "quantity": 3
+        }
+
+## Product Details - with NO available quantity. [/product/0]
+
+### Get single product details. [GET]
+
++ Response 200 (application/json)
+
+        {
+            "name": "Walking Dead Plush Zombie",
+            "quantity": 0
+        }
+
+
+## Order Details [/order/{id}]
+
+### Get order details. [GET]
+
++ Response 200 (application/json)
+
+        {
+            "productID  ": 2,
+            "creditCard": {
+                "holder": "Charlie Brown",
+                "number": "1234 4321 5678 8765",
+                "security": "000",
+                "expiration": "11/22"
+            }
+        }
+
+
+## Charge Credit Card [/charge-credit-card]
+
+### Do nothing on GET [GET]
+
++ Response 200 (application/json)
+    
+        true
+    
+
+### Post [POST]
+
++ Request (application/json)
+
++ Response 201 (application/json)
+
+        true
